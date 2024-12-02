@@ -1,16 +1,45 @@
+import { useState } from "react";
 import { Button } from "./components/Button";
 import { Card } from "./components/Card";
+import { CreateContentModel } from "./components/CreateContentModel";
 import { PlusIcon } from "./icons/Plusicon";
 import { ShareIcone } from "./icons/ShareIcon";
 
 const App = () => {
+  const [modelOpen, setModelOpen] = useState(true);
   return (
-    <div>
-      <Button variant="primary" text="Add content" startIcon={<PlusIcon />}></Button>
-      <Button variant="secondary" text="Share brain" startIcon={<ShareIcone />}></Button>
-      <Card />
+    <div className="p-4">
+      <CreateContentModel open={modelOpen} onClose={() => {
+        setModelOpen(false);
+      }} />
+      <div className="flex justify-end gap-4">
+      <Button onClick={() => {
+        setModelOpen(true)
+      }}
+        variant="primary"
+        text="Add content"
+        startIcon={<PlusIcon />}
+      ></Button>
+      <Button
+        variant="secondary"
+        text="Share brain"
+        startIcon={<ShareIcone />}
+      ></Button>
       </div>
-  )
-}
+      <div className="flex gap-4">
+        <Card
+          type="twitter"
+          link="https://x.com/EndWokeness/status/1863593429382410694/photo/1"
+          title="First tweet"
+        />
+        <Card
+          type="youtube"
+          link="https://youtu.be/-eDkV9yMBF0?si=d176Id5A3HmVxSyc"
+          title="First video"
+        />
+      </div>
+    </div>
+  );
+};
 
 export default App;
