@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/Button";
 import { Card } from "../components/Card";
 import { Sidebar } from "../components/Sidebar";
@@ -6,14 +6,21 @@ import { CreateContentModel } from "../components/CreateContentModel";
 import { PlusIcon } from "../icons/Plusicon";
 import { ShareIcone } from "../icons/ShareIcon";
 import { useContent } from "../hooks/useContent";
+import axios from "axios";
+import { BACKEND_URL } from "../components/config";
 
 export const Dashboard = () => {
   const [modelOpen, setModelOpen] = useState(false);
-  const contents = useContent();
+  const {contents, refresh} = useContent();
+
+  useEffect(() => {
+    refresh();
+  },[modelOpen])
+
   return (
     <div>
       <Sidebar />
-      <div className="p-4 ml-72 min-h-screen bg-gray-100 border-2">
+      <div className="p-4 min-h-screen bg-gray-100 border-2">
         <CreateContentModel
           open={modelOpen}
           onClose={() => {
@@ -29,13 +36,25 @@ export const Dashboard = () => {
             text="Add content"
             startIcon={<PlusIcon />}
           ></Button>
-          <Button
+          <Button onClick={async () => {
+            const response = await axios.post(`${BACKEND_URL}/api/v1/brain/share`, {
+              share: true
+          }, {
+            headers:{
+              "Authorization": localStorage.getItem("token")
+            }
+          });
+          const shareUrl = `http://localhost:5173/share/${response.data.hash}`;
+          alert(shareUrl);
+          
+          }}
+
             variant="secondary"
             text="Share brain"
             startIcon={<ShareIcone />}
           ></Button>
         </div>
-        <div className="flex gap-4 w-screen">
+        <div className="flex gap-4 w-screen mt-6 flex-wrap ">
           {contents.map(({type, link, title})=> <Card
             type={type}
             link={link}

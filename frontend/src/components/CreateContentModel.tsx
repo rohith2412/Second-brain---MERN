@@ -34,11 +34,13 @@ export function CreateContentModel({
         "Authorization": localStorage.getItem("token")
       }
     })
+
+    onClose();
   }
   return (
     <div>
       {open && (
-        <div className="w-screen h-screen bg-slate-300 fixed top-0 left-0 bg-opacity-80 flex justify-center items-center">
+        <div className=" h-screen bg-slate-300 fixed top-0 left-0 bg-opacity-80 flex justify-center items-center">
           <div className="bg-white p-6 rounded shadow-lg">
             <div className="flex justify-end ">
               <button onClick={onClose} className="p-2">
@@ -72,7 +74,7 @@ export function CreateContentModel({
                 ></Button>
               </div>
             </div>
-            <div className="flex justify-center mt-4">
+            <div className="flex justify-center mt-24">
               <Button
                 onClick={addContent}
                 variant="primary"
