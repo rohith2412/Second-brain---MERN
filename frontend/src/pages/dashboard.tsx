@@ -6,7 +6,7 @@ import { CreateContentModel } from "../components/CreateContentModel";
 import { PlusIcon } from "../icons/Plusicon";
 import { ShareIcone } from "../icons/ShareIcon";
 
-export const Dashbord = () => {
+export const Dashboard = () => {
   const [modelOpen, setModelOpen] = useState(false);
   return (
     <div>
@@ -50,4 +50,4 @@ export const Dashbord = () => {
   );
 };
 
-export default Dashbord;
+export default Dashboard;

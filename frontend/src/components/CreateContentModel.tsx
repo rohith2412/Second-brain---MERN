@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./Button";
+import { Input } from "./Input";
 
 export function CreateContentModel({ open, onClose }: { open: boolean; onClose: () => void }) {
   return (
@@ -14,11 +15,15 @@ export function CreateContentModel({ open, onClose }: { open: boolean; onClose: 
               </button>
             </div>
             <div className="flex flex-col gap-4">
-            <Input placeholder={"title"} />
-            <Input placeholder={"link"}  />
+            <Input placeholder={"title"} onchange={function (): void {
+                throw new Error("Function not implemented.");
+              } } />
+            <Input placeholder={"link"} onchange={function (): void {
+                throw new Error("Function not implemented.");
+              } }  />
             </div>
             <div className="flex justify-center mt-4">
-              <Button variant="primary" text="Submit" />
+              <Button variant="primary" text="Submit" startIcon={undefined} />
             </div>
           </div>
         </div>
@@ -26,9 +31,3 @@ export function CreateContentModel({ open, onClose }: { open: boolean; onClose: 
     </div>
   );
 }
-function Input({onchange, placeholder}: {onchange: () => void}) {
-    return <div>
-        <input placeholder={placeholder} type={"text"} className="px-4 py-2 border rounded m-2" onChange={onchange}/>
-    </div>
-}
-
