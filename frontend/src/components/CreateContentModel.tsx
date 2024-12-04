@@ -1,9 +1,15 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { CrossIcon } from "../icons/CrossIcon";
 import { Button } from "./Button";
 import { Input } from "./Input";
 
 export function CreateContentModel({ open, onClose }: { open: boolean; onClose: () => void }) {
+
+  const titleref = useRef;
+  const linkRef = useRef();
+
+  function addContent() {
+  }
   return (
     <div>
       {open && (
@@ -15,15 +21,11 @@ export function CreateContentModel({ open, onClose }: { open: boolean; onClose: 
               </button>
             </div>
             <div className="flex flex-col gap-4">
-            <Input placeholder={"title"} onchange={function (): void {
-                throw new Error("Function not implemented.");
-              } } />
-            <Input placeholder={"link"} onchange={function (): void {
-                throw new Error("Function not implemented.");
-              } }  />
+            <Input reference={titleref} placeholder={"title"}/>
+            <Input reference={linkRef} placeholder={"link"} />
             </div>
             <div className="flex justify-center mt-4">
-              <Button variant="primary" text="Submit" startIcon={undefined} />
+              <Button onClick={addContent} variant="primary" text="Submit" startIcon={undefined} />
             </div>
           </div>
         </div>
