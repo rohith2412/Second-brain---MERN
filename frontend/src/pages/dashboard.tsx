@@ -5,9 +5,11 @@ import { Sidebar } from "../components/Sidebar";
 import { CreateContentModel } from "../components/CreateContentModel";
 import { PlusIcon } from "../icons/Plusicon";
 import { ShareIcone } from "../icons/ShareIcon";
+import { useContent } from "../hooks/useContent";
 
 export const Dashboard = () => {
   const [modelOpen, setModelOpen] = useState(false);
+  const contents = useContent();
   return (
     <div>
       <Sidebar />
@@ -33,17 +35,12 @@ export const Dashboard = () => {
             startIcon={<ShareIcone />}
           ></Button>
         </div>
-        <div className="flex gap-4">
-          <Card
-            type="twitter"
-            link="https://x.com/EndWokeness/status/1863593429382410694/photo/1"
-            title="First tweet"
-          />
-          <Card
-            type="youtube"
-            link="https://youtu.be/-eDkV9yMBF0?si=d176Id5A3HmVxSyc"
-            title="First video"
-          />
+        <div className="flex gap-4 w-screen">
+          {contents.map(({type, link, title})=> <Card
+            type={type}
+            link={link}
+            title={title}
+          />)}
         </div>
       </div>
     </div>
